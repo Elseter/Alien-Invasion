@@ -5,7 +5,7 @@ from ship import Ship
 
 class AlienInvasion:
     """ Overall class to manage game assets and behavoir"""
-
+    
     def __init__(self):
         pygame.init()
         self.settings = Settings()

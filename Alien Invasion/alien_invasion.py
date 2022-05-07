@@ -3,6 +3,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
+from alien import Alien
 
 class AlienInvasion:
     """ Overall class to manage game assets and behavoir"""
@@ -26,6 +27,13 @@ class AlienInvasion:
         self.first_press = 0
         self.first_fire = True
         self.previous = 10000
+
+        #alien related variables and objects
+        self.aliens = pygame.sprite.Group()
+        self._create_fleet()
+
+    #---------------------------------------------------------------------------------------
+    #Events Handling
 
     def _check_events(self):
         """ Respond to keypresses and mouse events """
@@ -58,6 +66,9 @@ class AlienInvasion:
         elif event.key == pygame.K_UP:
             self.bullet_firing = False
 
+    #---------------------------------------------------------------------------------------
+    #Bullets Handling
+
     def _check_and_draw_bullet(self):
         """Checks if keypress is true, then activates the _fire_bullet method"""
         """Then updates all of the bullets in the bullets group"""
@@ -85,18 +96,29 @@ class AlienInvasion:
     def _update_bullets(self):
         """ Update the position of bullets and get rid of old ones"""
         self.bullets.update()
-
         #Get Rid of Bullets that have disappeared
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
-     
+    
+    #---------------------------------------------------------------------------------------
+    # Aliens Handling
+
+    def _create_fleet(self):
+        """Create a fleet of aliens"""
+        # make an alien
+        alien = Alien(self)
+        self.aliens.add(alien)
+
+    #---------------------------------------------------------------------------------------
+
 
     def _update_screen(self):
         """ update images and flip to new screen"""
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
         self._check_and_draw_bullet()
+        self.aliens.draw(self.screen)
         pygame.display.flip()
 
     def run_game(self):

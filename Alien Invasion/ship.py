@@ -24,11 +24,17 @@ class Ship:
         self.moving_right = False
         self.moving_left = False
 
-    def update(self):
+    def update(self, ai_game):
         """Update the ship's position based on movement flag"""
-        if self.moving_right:
+        # The first 3 lines are of my own design are suppose to keep the ship in position 
+        # Regardless of window width. Haven't figured out height yet
+        self.screen = ai_game.screen
+        self.screen_rect = ai_game.screen.get_rect()
+        
+
+        if self.moving_right and (self.rect.right < self.screen_rect.right):
             self.x += self.settings.ship_speed
-        if self.moving_left:
+        if self.moving_left and (self.rect.left > 0):
             self.x -= self.settings.ship_speed
         
         #Update rect object from self.x

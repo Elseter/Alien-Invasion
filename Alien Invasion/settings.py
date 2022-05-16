@@ -13,7 +13,9 @@ class Settings:
         self.bg_color = (230, 230, 230)
 
         #Ship Settings
-        self.ship_speed = 1.0      # default = 1.0 (Mac = 7.0)
+        self.ship_speed = 1.0     # default = 1.0 (Mac = 7.0)
+        self.ship_limit = 3
+
 
         #Bullet Settings
         self.bullet_speed = 1.0      # default = 1.0 (Mac = 10)

@@ -28,3 +28,24 @@ class Settings:
         self.alien_speed = 0.2         # default = 0.2 (Mac = 1)
         self.fleet_drop_speed = 5      # default = 5 (Mac = 5)
         self. fleet_direction = 1      # 1 = Right, -1 = left
+
+        #How quickly the game speeds up
+        self.speedup_scale = 1.1
+
+        self.initialize_dynamic_settings()
+    
+    def initialize_dynameic_settings(self):
+        """Initialize settings that change throughout the game"""
+        """Calling this method will reset values to default without recalling init"""
+        self.ship_speed = 1.0
+        self.bullet_speed = 1.0 
+        self.alien_speed = 0.2
+
+        self. fleet_direction = 1
+    
+    def increase_speed(self):
+        """Increase speed settings"""
+        self.ship_speed *= self.speedup_scale
+        self.bullet_speed *= self.speedup_scale
+        self.alien_speed *= self.speedup_scale
+

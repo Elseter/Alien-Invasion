@@ -23,6 +23,6 @@ class Settings:
         self.bullet_cooldown = 300     # default 300 (Mac = 500)
 
         #Alien settings
-        self.alien_speed = 0.2        # default = 0.2 (Mac = 1)
+        self.alien_speed = 0.2         # default = 0.2 (Mac = 1)
         self.fleet_drop_speed = 5      # default = 5 (Mac = 5)
-        self. fleet_direction = 1 # 1 = Right, -1 = left
+        self. fleet_direction = 1      # 1 = Right, -1 = left

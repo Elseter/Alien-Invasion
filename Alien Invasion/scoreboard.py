@@ -41,7 +41,17 @@ class Scoreboard:
 
     def prep_high_score(self):
         """Turn High Score into a rendered image"""
-        high_score = round(self.stats.high_score, -1)
+        try:
+            storage_object = open("Alien Invasion\storage.txt", "r")
+            high_score = storage_object.readline()  
+            storage_object.close()   
+            high_score = high_score.split(" ") 
+            high_score = round(int(high_score[1]), -1)
+            self.stats.high_score = high_score
+        except Exception as e:
+            high_score = round(self.stats.high_score, -1)
+            print(e)
+
         high_score_str = "{:,}".format(high_score)
         self.high_score_image = self.font.render(high_score_str, True, self.text_color,
                 self.settings.bg_color)
@@ -55,6 +65,12 @@ class Scoreboard:
         """Check to see if there is a new high score"""
         if self.stats.score > self.stats.high_score:
             self.stats.high_score = self.stats.score
+            try:
+                storage_object = open("Alien Invasion\storage.txt", "w")
+                storage_object.write(f"current-high-score: {self.stats.high_score}")
+                storage_object.close()
+            except Exception as e:
+                print(e)
             self.prep_high_score()
     
     def prep_level(self):
@@ -76,3 +92,14 @@ class Scoreboard:
             ship.rect.x = 10 + ship_number * ship.rect.width
             ship.rect.y = 10
             self.ships.add(ship)
+
+try:
+    storage_object = open("Alien Invasion\storage.txt", "r")
+    high_score = storage_object.readline()  
+    storage_object.close()   
+    high_score = high_score.split(" ") 
+    high_score = round(int(high_score[1]), -1) 
+    print(high_score)
+    print(type(high_score))
+except Exception as e:
+    print(e)
